@@ -14,12 +14,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sampleapp3.presentation.view.theme.AppTypography
 import com.example.sampleapp3.presentation.view.theme.SampleApp3Theme
 import com.example.sampleapp3.presentation.viewmodel.FirstViewModel
-import com.example.sampleapp3.presentation.viewmodel.ViewModelFactory
+import com.example.sampleapp3.presentation.viewmodel.AppViewModelFactory
 
 @Composable
 fun FirstView() {
     //TODO ViewModelFactory from DI
-    val viewModel: FirstViewModel = viewModel(factory = ViewModelFactory())
+    val viewModel: FirstViewModel = viewModel(factory = AppViewModelFactory())
     FirstView(
         title = viewModel.title.collectAsState(),
         subTitle = viewModel.subTitle.collectAsState(),

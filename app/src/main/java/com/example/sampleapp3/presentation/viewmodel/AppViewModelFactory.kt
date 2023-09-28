@@ -5,14 +5,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.sampleapp3.data.repository.UserRepository
 
-class ViewModelFactory: ViewModelProvider.Factory {
+class AppViewModelFactory: ViewModelProvider.Factory {
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T =
         when {
-            //TODO
+            //TODO DI
             modelClass.isAssignableFrom(FirstViewModel::class.java) -> {
-                FirstViewModel(UserRepository()) as T
+                FirstViewModel(UserRepository())
             }
             else -> throw IllegalArgumentException("Unknown View Model")
-        }
+        } as T
 }
