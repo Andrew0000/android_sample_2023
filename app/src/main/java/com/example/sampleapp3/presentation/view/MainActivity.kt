@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SampleApp3Theme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    FirstView("Android")
+                    FirstView()
                 }
             }
         }
