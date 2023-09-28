@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class FirstViewModel(
     private val userRepository: UserRepository,
@@ -22,10 +23,16 @@ class FirstViewModel(
     val subTitle: StateFlow<String> = _subTitle
 
     init {
+        Timber.d("FirstViewModel init")
         viewModelScope.launch {
             loadTitle()
             loadSubTitle()
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Timber.d("FirstViewModel onCleared")
     }
 
     private suspend fun loadTitle() {

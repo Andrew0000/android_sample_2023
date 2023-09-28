@@ -57,6 +57,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
     val koinVersion = "3.5.0"
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-core-coroutines:$koinVersion")
