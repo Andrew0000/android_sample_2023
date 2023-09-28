@@ -1,8 +1,8 @@
 package com.example.sampleapp3
 
 import android.app.Application
-import com.example.sampleapp3.data.dataModule
-import com.example.sampleapp3.presentation.presentationModule
+import com.example.sampleapp3.data.di.dataModule
+import com.example.sampleapp3.presentation.di.presentationModule
 import org.koin.core.context.startKoin
 import timber.log.Timber
 

@@ -1,4 +1,4 @@
-package com.example.sampleapp3.presentation
+package com.example.sampleapp3.presentation.di
 
 import com.example.sampleapp3.presentation.viewmodel.AppViewModelFactory
 import com.example.sampleapp3.presentation.viewmodel.FirstViewModel
