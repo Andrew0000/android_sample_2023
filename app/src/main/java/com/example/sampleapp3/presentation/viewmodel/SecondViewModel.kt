@@ -2,18 +2,21 @@ package com.example.sampleapp3.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sampleapp3.data.repository.UserRepository
+import com.example.sampleapp3.data.model.University
+import com.example.sampleapp3.data.repository.UniversitiesRepository
 import com.example.sampleapp3.presentation.navigation.AppScreen
 import com.example.sampleapp3.presentation.navigation.NavigationMediator
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class SecondViewModel(
     private val navigationMediator: NavigationMediator,
-    private val userRepository: UserRepository,
+    private val universitiesRepository: UniversitiesRepository,
 ) : ViewModel() {
 
     private val _items = MutableStateFlow(listOf<SecondScreenItem>())
@@ -33,15 +36,24 @@ class SecondViewModel(
         Timber.d("SecondViewModel onCleared")
     }
 
-    //TODO load from repo
     private fun loadItems() {
-        viewModelScope.launch {
-            delay(2000)
-            _items.value = listOf(
-                SecondScreenItem("first", "this is first"),
-                SecondScreenItem("second", "this is second"),
-                SecondScreenItem("third", "this is third"),
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val items = universitiesRepository.getUniversities()
+                withContext(Dispatchers.Main) {
+                    _items.value = items
+                        .map {
+                            SecondScreenItem(
+                                it.name,
+                                it.domains?.firstOrNull()?.toString().orEmpty()
+                            )
+                        }
+                }
+            } catch (e: Exception) {
+                ensureActive()
+                Timber.e(e)
+                //TODO show error
+            }
         }
     }
 
