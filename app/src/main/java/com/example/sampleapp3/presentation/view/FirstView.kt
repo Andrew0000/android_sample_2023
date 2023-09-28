@@ -10,16 +10,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sampleapp3.presentation.view.theme.AppTypography
 import com.example.sampleapp3.presentation.view.theme.SampleApp3Theme
 import com.example.sampleapp3.presentation.viewmodel.FirstViewModel
-import com.example.sampleapp3.presentation.viewmodel.AppViewModelFactory
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun FirstView() {
-    //TODO ViewModelFactory from DI
-    val viewModel: FirstViewModel = viewModel(factory = AppViewModelFactory())
+    val viewModel: FirstViewModel = koinViewModel()
     FirstView(
         title = viewModel.title.collectAsState(),
         subTitle = viewModel.subTitle.collectAsState(),
