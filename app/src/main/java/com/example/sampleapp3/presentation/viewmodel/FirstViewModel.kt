@@ -3,6 +3,8 @@ package com.example.sampleapp3.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sampleapp3.data.repository.UserRepository
+import com.example.sampleapp3.presentation.navigation.AppScreen
+import com.example.sampleapp3.presentation.navigation.NavigationMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
@@ -13,6 +15,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class FirstViewModel(
+    private val navigationMediator: NavigationMediator,
     private val userRepository: UserRepository,
 ) : ViewModel() {
 
@@ -28,6 +31,10 @@ class FirstViewModel(
             loadTitle()
             loadSubTitle()
         }
+    }
+
+    fun onClickNextButton() {
+        navigationMediator.requestScreen(AppScreen.SECOND)
     }
 
     override fun onCleared() {
@@ -49,6 +56,7 @@ class FirstViewModel(
         }
     }
 
+    //TODO load from repo
     private suspend fun loadSubTitle() {
         delay(2000)
         _subTitle.value = "Sub Title 1"

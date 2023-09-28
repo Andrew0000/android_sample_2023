@@ -3,6 +3,7 @@ package com.example.sampleapp3.presentation.view
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -21,6 +22,7 @@ fun FirstView() {
     FirstView(
         title = viewModel.title.collectAsState(),
         subTitle = viewModel.subTitle.collectAsState(),
+        onClick = viewModel::onClickNextButton,
     )
 }
 
@@ -28,6 +30,7 @@ fun FirstView() {
 private fun FirstView(
     title: State<String>,
     subTitle: State<String>,
+    onClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -41,6 +44,12 @@ private fun FirstView(
             text = subTitle.value,
             style = AppTypography.bodyLarge
         )
+        Button(onClick = onClick) {
+            Text(
+                text = "To Second",
+                style = AppTypography.bodyLarge
+            )
+        }
     }
 }
 
@@ -52,6 +61,7 @@ private fun FirstViewPreview() {
         FirstView(
             title = mutableStateOf("Title"),
             subTitle = mutableStateOf("Sub Title"),
+            onClick = {},
         )
     }
 }
