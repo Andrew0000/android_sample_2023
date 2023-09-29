@@ -6,7 +6,6 @@ import com.example.sampleapp3.data.repository.UserRepository
 import com.example.sampleapp3.presentation.navigation.AppScreen
 import com.example.sampleapp3.presentation.navigation.NavigationMediator
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class FirstViewModel(
+class UserViewModel(
     private val navigationMediator: NavigationMediator,
     private val userRepository: UserRepository,
 ) : ViewModel() {
@@ -26,11 +25,8 @@ class FirstViewModel(
     val subTitle: StateFlow<String> = _subTitle
 
     init {
-        Timber.d("FirstViewModel init")
-        viewModelScope.launch {
-            loadTitle()
-            loadSubTitle()
-        }
+        Timber.d("UserViewModel init")
+        loadUser()
     }
 
     fun onClickNextButton() {
@@ -39,27 +35,22 @@ class FirstViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        Timber.d("FirstViewModel onCleared")
+        Timber.d("UserViewModel onCleared")
     }
 
-    private suspend fun loadTitle() {
-        withContext(Dispatchers.IO) {
+    private fun loadUser() {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val user = userRepository.getUser()
                 withContext(Dispatchers.Main) {
-                    _title.value = user.name + " " + user.surName
+                    _title.value = user.name.first + " " + user.name.last
+                    _subTitle.value = user.email
                 }
             } catch (e: Exception) {
                 ensureActive()
+                Timber.e(e)
                 //TODO show error
             }
         }
     }
-
-    //TODO load from repo
-    private suspend fun loadSubTitle() {
-        delay(2000)
-        _subTitle.value = "Sub Title 1"
-    }
-
 }

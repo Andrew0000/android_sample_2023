@@ -8,7 +8,7 @@ import org.koin.dsl.module
 val dataModule = module {
 
     single { Api() }
-    single { UserRepository() }
+    single { UserRepository(get()) }
     single { UniversitiesRepository(get()) }
 
 }

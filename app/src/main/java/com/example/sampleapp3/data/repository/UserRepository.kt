@@ -1,16 +1,13 @@
 package com.example.sampleapp3.data.repository
 
 import com.example.sampleapp3.data.model.User
-import kotlinx.coroutines.delay
+import com.example.sampleapp3.data.network.Api
 
-class UserRepository {
+class UserRepository(
+    private val api: Api,
+) {
 
     suspend fun getUser(): User {
-        //TODO real loading
-        delay(1000)
-        return User(
-            name = "Andrei",
-            surName = "Vorobei",
-        )
+        return api.getUser().results.first()
     }
 }

@@ -58,7 +58,7 @@ private fun SecondView(
         }
         Button(onClick = onClick) {
             Text(
-                text = "To First",
+                text = "To User",
                 style = AppTypography.bodyLarge
             )
         }

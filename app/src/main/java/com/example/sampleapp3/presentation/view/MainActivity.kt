@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 navController = navController,
                 startDestination = AppScreen.FIRST.id,
             ) {
-                composable(AppScreen.FIRST.id) { FirstView() }
+                composable(AppScreen.FIRST.id) { UserView() }
                 composable(AppScreen.SECOND.id) { SecondView() }
             }
             NavigationUpdater(navController)

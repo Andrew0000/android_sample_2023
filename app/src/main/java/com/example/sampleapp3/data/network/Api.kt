@@ -1,6 +1,7 @@
 package com.example.sampleapp3.data.network
 
 import com.example.sampleapp3.data.model.University
+import com.example.sampleapp3.data.model.UserResult
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -18,6 +19,11 @@ class Api {
                 }
             )
         }
+    }
+
+    suspend fun getUser(): UserResult {
+        val response = client.get("https://randomuser.me/api/")
+        return response.body()
     }
 
     suspend fun getUniversities(): List<University> {

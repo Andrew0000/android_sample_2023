@@ -13,13 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.sampleapp3.presentation.view.theme.AppTypography
 import com.example.sampleapp3.presentation.view.theme.SampleApp3Theme
-import com.example.sampleapp3.presentation.viewmodel.FirstViewModel
+import com.example.sampleapp3.presentation.viewmodel.UserViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun FirstView() {
-    val viewModel: FirstViewModel = koinViewModel()
-    FirstView(
+fun UserView() {
+    val viewModel: UserViewModel = koinViewModel()
+    UserView(
         title = viewModel.title.collectAsState(),
         subTitle = viewModel.subTitle.collectAsState(),
         onClick = viewModel::onClickNextButton,
@@ -27,7 +27,7 @@ fun FirstView() {
 }
 
 @Composable
-private fun FirstView(
+private fun UserView(
     title: State<String>,
     subTitle: State<String>,
     onClick: () -> Unit,
@@ -56,9 +56,9 @@ private fun FirstView(
 @Preview(showBackground = true)
 @Composable
 @SuppressLint("UnrememberedMutableState")
-private fun FirstViewPreview() {
+private fun UserViewPreview() {
     SampleApp3Theme {
-        FirstView(
+        UserView(
             title = mutableStateOf("Title"),
             subTitle = mutableStateOf("Sub Title"),
             onClick = {},
