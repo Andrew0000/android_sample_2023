@@ -18,8 +18,8 @@ class UniversitiesViewModel(
     private val universitiesRepository: UniversitiesRepository,
 ) : ViewModel() {
 
-    private val _items = MutableStateFlow(listOf<UniversitiyScreenItem>())
-    val items: StateFlow<List<UniversitiyScreenItem>> = _items
+    private val _items = MutableStateFlow(listOf<UniversityScreenItem>())
+    val items: StateFlow<List<UniversityScreenItem>> = _items
 
     init {
         Timber.d("UniversitiesViewModel init")
@@ -42,9 +42,9 @@ class UniversitiesViewModel(
                 withContext(Dispatchers.Main) {
                     _items.value = items
                         .map {
-                            UniversitiyScreenItem(
-                                it.name,
-                                it.domains?.firstOrNull()?.toString().orEmpty()
+                            UniversityScreenItem(
+                                name = it.name,
+                                description = it.domains?.firstOrNull()?.toString().orEmpty()
                             )
                         }
                 }

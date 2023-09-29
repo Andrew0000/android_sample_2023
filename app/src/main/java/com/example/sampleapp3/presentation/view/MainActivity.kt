@@ -39,14 +39,19 @@ class MainActivity : ComponentActivity() {
             color = MaterialTheme.colorScheme.background,
         ) {
             val navController = rememberNavController()
-            NavHost(
-                navController = navController,
-                startDestination = AppScreen.USER.id,
-            ) {
-                composable(AppScreen.USER.id) { UserView() }
-                composable(AppScreen.UNIVERSITIES.id) { UniversitiesView() }
-            }
+            AppNavigationHost(navController)
             NavigationUpdater(navController)
+        }
+    }
+
+    @Composable
+    private fun AppNavigationHost(navController: NavHostController) {
+        NavHost(
+            navController = navController,
+            startDestination = AppScreen.USER.id,
+        ) {
+            composable(AppScreen.USER.id) { UserView() }
+            composable(AppScreen.UNIVERSITIES.id) { UniversitiesView() }
         }
     }
 

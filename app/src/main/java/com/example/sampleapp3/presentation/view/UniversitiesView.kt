@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sampleapp3.presentation.view.theme.AppTypography
 import com.example.sampleapp3.presentation.view.theme.SampleApp3Theme
-import com.example.sampleapp3.presentation.viewmodel.UniversitiyScreenItem
+import com.example.sampleapp3.presentation.viewmodel.UniversityScreenItem
 import com.example.sampleapp3.presentation.viewmodel.UniversitiesViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -33,7 +33,7 @@ fun UniversitiesView() {
 
 @Composable
 private fun UniversitiesView(
-    items: State<List<UniversitiyScreenItem>>,
+    items: State<List<UniversityScreenItem>>,
     onClick: () -> Unit,
 ) {
     Column(
@@ -73,8 +73,8 @@ private fun UniversitiesPreview() {
         UniversitiesView(
             items = mutableStateOf(
                 listOf(
-                    UniversitiyScreenItem("First", "Description"),
-                    UniversitiyScreenItem("Second", "Description"),
+                    UniversityScreenItem("First", "Description"),
+                    UniversityScreenItem("Second", "Description"),
                 )
             ),
             onClick = {},
