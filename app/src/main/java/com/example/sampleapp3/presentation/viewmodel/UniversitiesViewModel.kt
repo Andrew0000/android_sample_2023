@@ -43,14 +43,14 @@ class UniversitiesViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val items = universitiesRepository.getUniversities()
+                    .map {
+                        UniversityScreenItem(
+                            name = it.name,
+                            description = it.domains?.firstOrNull()?.toString().orEmpty()
+                        )
+                    }
                 withContext(Dispatchers.Main) {
                     _items.value = items
-                        .map {
-                            UniversityScreenItem(
-                                name = it.name,
-                                description = it.domains?.firstOrNull()?.toString().orEmpty()
-                            )
-                        }
                 }
             } catch (e: Exception) {
                 ensureActive()
