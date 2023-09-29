@@ -21,6 +21,9 @@ class UniversitiesViewModel(
     private val _items = MutableStateFlow(listOf<UniversityScreenItem>())
     val items: StateFlow<List<UniversityScreenItem>> = _items
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
     init {
         Timber.d("UniversitiesViewModel init")
         loadItems()
@@ -36,6 +39,7 @@ class UniversitiesViewModel(
     }
 
     private fun loadItems() {
+        _isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val items = universitiesRepository.getUniversities()
@@ -52,6 +56,10 @@ class UniversitiesViewModel(
                 ensureActive()
                 Timber.e(e)
                 //TODO show error
+            } finally {
+                withContext(Dispatchers.Main) {
+                    _isLoading.value = false
+                }
             }
         }
     }
