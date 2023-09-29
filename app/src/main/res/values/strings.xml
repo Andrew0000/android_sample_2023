@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sample App 3</string>
+    <string name="user_screen_title">User</string>
 </resources>

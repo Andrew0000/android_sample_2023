@@ -24,6 +24,9 @@ class UserViewModel(
     private val _subTitle = MutableStateFlow("")
     val subTitle: StateFlow<String> = _subTitle
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
     init {
         Timber.d("UserViewModel init")
         loadUser()
@@ -39,6 +42,7 @@ class UserViewModel(
     }
 
     private fun loadUser() {
+        _isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val user = userRepository.getUser()
@@ -50,6 +54,10 @@ class UserViewModel(
                 ensureActive()
                 Timber.e(e)
                 //TODO show error
+            } finally {
+                withContext(Dispatchers.Main) {
+                    _isLoading.value = false
+                }
             }
         }
     }
