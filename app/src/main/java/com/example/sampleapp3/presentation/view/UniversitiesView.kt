@@ -18,22 +18,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sampleapp3.presentation.view.theme.AppTypography
 import com.example.sampleapp3.presentation.view.theme.SampleApp3Theme
-import com.example.sampleapp3.presentation.viewmodel.SecondScreenItem
-import com.example.sampleapp3.presentation.viewmodel.SecondViewModel
+import com.example.sampleapp3.presentation.viewmodel.UniversitiyScreenItem
+import com.example.sampleapp3.presentation.viewmodel.UniversitiesViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SecondView() {
-    val viewModel: SecondViewModel = koinViewModel()
-    SecondView(
+fun UniversitiesView() {
+    val viewModel: UniversitiesViewModel = koinViewModel()
+    UniversitiesView(
         items = viewModel.items.collectAsState(),
         onClick = viewModel::onClickBack,
     )
 }
 
 @Composable
-private fun SecondView(
-    items: State<List<SecondScreenItem>>,
+private fun UniversitiesView(
+    items: State<List<UniversitiyScreenItem>>,
     onClick: () -> Unit,
 ) {
     Column(
@@ -68,13 +68,13 @@ private fun SecondView(
 @Preview(showBackground = true)
 @Composable
 @SuppressLint("UnrememberedMutableState")
-private fun SecondViewPreview() {
+private fun UniversitiesPreview() {
     SampleApp3Theme {
-        SecondView(
+        UniversitiesView(
             items = mutableStateOf(
                 listOf(
-                    SecondScreenItem("First", "Description"),
-                    SecondScreenItem("Second", "Description"),
+                    UniversitiyScreenItem("First", "Description"),
+                    UniversitiyScreenItem("Second", "Description"),
                 )
             ),
             onClick = {},

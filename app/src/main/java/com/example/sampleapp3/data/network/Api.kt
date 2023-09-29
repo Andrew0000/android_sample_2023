@@ -11,7 +11,7 @@ import kotlinx.serialization.json.Json
 
 class Api {
 
-    private val client = HttpClient() {
+    private val client = HttpClient {
         install(ContentNegotiation) {
             json(
                 Json {

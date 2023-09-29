@@ -2,7 +2,6 @@ package com.example.sampleapp3.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sampleapp3.data.model.University
 import com.example.sampleapp3.data.repository.UniversitiesRepository
 import com.example.sampleapp3.presentation.navigation.AppScreen
 import com.example.sampleapp3.presentation.navigation.NavigationMediator
@@ -14,26 +13,26 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class SecondViewModel(
+class UniversitiesViewModel(
     private val navigationMediator: NavigationMediator,
     private val universitiesRepository: UniversitiesRepository,
 ) : ViewModel() {
 
-    private val _items = MutableStateFlow(listOf<SecondScreenItem>())
-    val items: StateFlow<List<SecondScreenItem>> = _items
+    private val _items = MutableStateFlow(listOf<UniversitiyScreenItem>())
+    val items: StateFlow<List<UniversitiyScreenItem>> = _items
 
     init {
-        Timber.d("SecondViewModel init")
+        Timber.d("UniversitiesViewModel init")
         loadItems()
     }
 
     fun onClickBack() {
-        navigationMediator.requestScreen(AppScreen.FIRST)
+        navigationMediator.requestScreen(AppScreen.USER)
     }
 
     override fun onCleared() {
         super.onCleared()
-        Timber.d("SecondViewModel onCleared")
+        Timber.d("UniversitiesViewModel onCleared")
     }
 
     private fun loadItems() {
@@ -43,7 +42,7 @@ class SecondViewModel(
                 withContext(Dispatchers.Main) {
                     _items.value = items
                         .map {
-                            SecondScreenItem(
+                            UniversitiyScreenItem(
                                 it.name,
                                 it.domains?.firstOrNull()?.toString().orEmpty()
                             )

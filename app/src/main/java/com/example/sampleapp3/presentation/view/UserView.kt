@@ -46,7 +46,7 @@ private fun UserView(
         )
         Button(onClick = onClick) {
             Text(
-                text = "To Second",
+                text = "To Universities",
                 style = AppTypography.bodyLarge
             )
         }

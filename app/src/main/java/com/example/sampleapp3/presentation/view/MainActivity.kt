@@ -41,10 +41,10 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             NavHost(
                 navController = navController,
-                startDestination = AppScreen.FIRST.id,
+                startDestination = AppScreen.USER.id,
             ) {
-                composable(AppScreen.FIRST.id) { UserView() }
-                composable(AppScreen.SECOND.id) { SecondView() }
+                composable(AppScreen.USER.id) { UserView() }
+                composable(AppScreen.UNIVERSITIES.id) { UniversitiesView() }
             }
             NavigationUpdater(navController)
         }

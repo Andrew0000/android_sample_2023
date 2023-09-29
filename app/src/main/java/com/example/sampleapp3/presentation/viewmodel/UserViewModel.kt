@@ -30,7 +30,7 @@ class UserViewModel(
     }
 
     fun onClickNextButton() {
-        navigationMediator.requestScreen(AppScreen.SECOND)
+        navigationMediator.requestScreen(AppScreen.UNIVERSITIES)
     }
 
     override fun onCleared() {
