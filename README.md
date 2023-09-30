@@ -8,7 +8,7 @@ Basic modern technologies for android development:
 - **Ktor** for network requests.
 - **Serialization** for Json parsing.
 - **Koin** for dependency injection.
-- **ViewModel** for VIew state management and actions handling.
+- **ViewModel** for View state management and actions handling.
 
 Basic architecture according [the recommended approach](https://developer.android.com/topic/architecture):
 - Layered architecture
