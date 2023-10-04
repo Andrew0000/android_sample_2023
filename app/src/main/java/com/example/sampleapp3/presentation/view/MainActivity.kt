@@ -59,8 +59,11 @@ class MainActivity : ComponentActivity() {
     private fun NavigationUpdater(navController: NavHostController) {
         val requestedScreen = navigationMediator.requestedScreen.collectAsState()
         LaunchedEffect(requestedScreen.value) {
-            navController.popBackStack()
-            navController.navigate(requestedScreen.value.id)
+            val currentRoute = navController.currentDestination?.route
+            if (currentRoute != requestedScreen.value.id) {
+                navController.popBackStack()
+                navController.navigate(requestedScreen.value.id)
+            }
         }
     }
 }
